@@ -12,6 +12,14 @@ describe('required-argument:', function(){
             expect(test).to.throw(/myfunc/);
         });
 
+        it('should include the parameter name where provided', function() {
+            function myfunc(a = req('argumentName')){};
+            function test() { myfunc() };
+
+            expect(test).to.throw(Error);
+            expect(test).to.throw(/argumentName/);
+        });
+
         context('with 1 argument', function(){
             it('should throw an error when argument is not passed', function(){
                 function myfunc(a = req()){};
